@@ -1,0 +1,42 @@
+.spec-table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    background-color: #F6F6F6;
+    width: 65%;
+  }
+  
+  .spec-table tr:first-child {
+    border-top: 1px solid #d7d7d7;
+  }
+  
+  .spec-table tr {
+    border-bottom: 1px solid #D7D7D7;
+  }
+  
+  .spec-table tr td {
+    color: #212121;
+    font-weight: 400;
+    padding: 10px 8px 8px;
+    margin: 0;
+    width: 50%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-all;
+    word-break: break-word;
+  }
+  
+  .spec-table tr:nth-child(2n) {
+    margin-right: 0;
+    background-color: #EAEAEA;
+  }
+
+  .top-nav-tagline {
+    margin-top: auto;
+    margin-bottom: auto;
+    font-weight: bold;
+  }
+
+  h3.home-banner-subtitle {
+    text-align: center;
+    color: rgb(132, 132, 132);
+  }

@@ -1,0 +1,1 @@
+docker buildx build --platform linux/amd64 --tag registry.digitalocean.com/favorware/koolair_remix:latest --push .
