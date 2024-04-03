@@ -10,10 +10,10 @@ export default function DatasheetsPage() {
           <h3 className="px-4 mt-6 text-2xl text-gray-900">Manuals</h3>
           <div className="max-w-6xl mx-auto py-4 px-4 space-y-4">
             <ul  className="py-4 px-4 space-y-4 item-list-terms">
-              <li><a href="https://d1pkofokfruj4.cloudfront.net/media/upload/resource/j/Koolair-Pump-PM500-Datasheet-9-21-2022-v1.1.pdf" className="text-blue-600 font-medium terms-prop">PM500 Series Datasheet</a></li>
-              <li><a href="https://d1pkofokfruj4.cloudfront.net/media/upload/resource/m/Koolair-Pump-TPM1000-Datasheet-10-1-2018-v1.pdf" className="text-blue-600 font-medium terms-prop">TPM1000 Series Datasheet</a></li>
-              <li><a href="https://d1pkofokfruj4.cloudfront.net/media/upload/resource/a/Koolair-Pump-PM1000-Datasheet-9-21-2022.pdf" className="text-blue-600 font-medium terms-prop">PM1000 Series Datasheet</a></li>
-              <li><a href="https://d1pkofokfruj4.cloudfront.net/media/upload/resource/r/Koolair-Pump-SPM1000-Datasheet-9-22-2022-V2.pdf" className="text-blue-600 font-medium terms-prop">SPM1000 Series Datasheet</a></li>
+              <li><a href="https://d1pkofokfruj4.cloudfront.net/media/upload/resource/j/Koolair-Pump-PM500-Datasheet-9-21-2022-v1.1.pdf" className="text-blue-600 font-medium terms-prop" target="_blank">PM500 Series Datasheet</a></li>
+              <li><a href="https://d1pkofokfruj4.cloudfront.net/media/upload/resource/m/Koolair-Pump-TPM1000-Datasheet-10-1-2018-v1.pdf" className="text-blue-600 font-medium terms-prop" target="_blank">TPM1000 Series Datasheet</a></li>
+              <li><a href="https://d1pkofokfruj4.cloudfront.net/media/upload/resource/a/Koolair-Pump-PM1000-Datasheet-9-21-2022.pdf" className="text-blue-600 font-medium terms-prop" target="_blank">PM1000 Series Datasheet</a></li>
+              <li><a href="https://d1pkofokfruj4.cloudfront.net/media/upload/resource/r/Koolair-Pump-SPM1000-Datasheet-9-22-2022-V2.pdf" className="text-blue-600 font-medium terms-prop" target="_blank">SPM1000 Series Datasheet</a></li>
               <li><a href="">PM300 Datasheet</a></li>
             </ul>
         </div>
