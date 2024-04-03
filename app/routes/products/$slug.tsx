@@ -59,6 +59,7 @@ export default function ProductSlug() {
   }>();
   const { activeOrder } = activeOrderFetcher.data ?? {};
   const addItemToOrderError = getAddItemToOrderError(error);
+  let allowOrder = true;
 
   if (!product) {
     return <div>Product not found!</div>;
@@ -90,7 +91,9 @@ export default function ProductSlug() {
 
   let lenSpecs = 0;
   Object.keys(product?.customFields).map((propKey) => {
-    if (product.customFields[propKey] !== '' && product.customFields[propKey] !== 0) {
+    if (propKey === 'allowOrder') {
+      allowOrder = product.customFields['allowOrder'];
+    } else if (product.customFields[propKey] !== '' && product.customFields[propKey] !== 0) {
       lenSpecs++;
     }
   });
@@ -222,12 +225,15 @@ export default function ProductSlug() {
               )}
 
               <div className="mt-10 flex flex-col sm:flex-row sm:items-center">
+              {allowOrder && (
                 <p className="text-3xl text-gray-900 mr-4">
                   <Price
                     priceWithTax={selectedVariant?.priceWithTax}
                     currencyCode={selectedVariant?.currencyCode}
                   ></Price>
                 </p>
+              )}
+              {allowOrder && (
                 <div className="flex sm:flex-col1 align-baseline">
                   <button
                     type="submit"
@@ -265,10 +271,11 @@ export default function ProductSlug() {
                   </button>
                     */}
                 </div>
+              )}
               </div>
               <div className="mt-2 flex items-center space-x-2">
                 <span className="text-gray-500">{selectedVariant?.sku}</span>
-                <StockLevelLabel stockLevel={selectedVariant?.stockLevel} />
+                <StockLevelLabel stockLevel={allowOrder ? selectedVariant?.stockLevel : 'OUT_OF_STOCK'} />
               </div>
               {addItemToOrderError && (
                 <div className="mt-4">
@@ -282,7 +289,8 @@ export default function ProductSlug() {
                 <SpecTable items={product.customFields} />
                 </div>
               </section>
-              )}        
+              )}
+              {allowOrder && (        
               <section className="mt-12 pt-12 border-t text-xs">
                 <h3 className="text-gray-600 font-bold mb-2">
                   Shipping & Returns
@@ -303,15 +311,11 @@ export default function ProductSlug() {
                   </p>
                 </div>
               </section>
+              )}
             </activeOrderFetcher.Form>
           </div>
         </div>
-      </div>
-      {/*
-      <div className="mt-24">
-        <TopReviews></TopReviews>
-      </div>
-      */}
+      </div>      
     </div>    
   );
 }

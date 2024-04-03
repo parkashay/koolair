@@ -66,6 +66,7 @@ export const detailedProductFragment = gql`
       maximumFlow
       headsToFeet
       connectionsDischarge
+      allowOrder
     }
     variants {
       id

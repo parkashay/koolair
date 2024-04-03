@@ -36,7 +36,7 @@ export const meta: MetaFunction = (data) => {
   let title = APP_META_TITLE;
   let description = APP_META_DESCRIPTION;
   
-  if (data.data.seoData) {
+  if (data.data?.seoData) {
     const foundMatch = data.data.seoData.find(({ uri }) => uri === data.location.pathname);
     if (foundMatch) {
       title = foundMatch.title;
