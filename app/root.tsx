@@ -191,6 +191,7 @@ function DefaultSparseErrorPage({
   headline,
   description,
 }: DefaultSparseErrorPageProps) {
+  const [open, setOpen] = useState(false);
   return (
     <html lang="en" id="app">
       <head>
@@ -201,6 +202,7 @@ function DefaultSparseErrorPage({
         <Links />
       </head>
       <body>
+        <Header onCartIconClick={() => setOpen(!open)} cartQuantity={0} />
         <main className="flex flex-col items-center px-4 py-16 sm:py-32 text-center">
           <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide">
             {tagline}
@@ -220,6 +222,8 @@ function DefaultSparseErrorPage({
             </Link>
           </div>
         </main>
+        <Footer collections={[]}></Footer>
+
         <ScrollRestoration />
         <Scripts />
         {devMode && <LiveReload />}
@@ -282,7 +286,7 @@ export function ErrorBoundary() {
   const error = useRouteError();
   if (isRouteErrorResponse(error)) {
     tagline = `404`;
-    headline = 'Page Not Found.';
+    headline = 'Page Not Found';
     description =
       'It looks like nothing was found at this location. Maybe try one of the links below or search?';
   }
