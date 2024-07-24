@@ -51,7 +51,7 @@ export const detailedProductFragment = gql`
       preview
     }
     customFields {
-      productNotes,
+      productNotes
       shortDescription
       weight
       length
@@ -71,6 +71,7 @@ export const detailedProductFragment = gql`
     variants {
       id
       name
+      price
       priceWithTax
       currencyCode
       sku

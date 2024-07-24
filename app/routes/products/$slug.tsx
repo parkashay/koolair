@@ -93,7 +93,10 @@ export default function ProductSlug() {
   Object.keys(product?.customFields).map((propKey) => {
     if (propKey === 'allowOrder') {
       allowOrder = product.customFields['allowOrder'];
-    } else if (product.customFields[propKey] !== '' && product.customFields[propKey] !== 0) {
+    } else if (
+      product.customFields[propKey] !== '' &&
+      product.customFields[propKey] !== 0
+    ) {
       lenSpecs++;
     }
   });
@@ -102,24 +105,34 @@ export default function ProductSlug() {
 
   const productPageSchema = function ProductPageSchema(product, url) {
     return JSON.stringify({
-          "@context": "http://schema.org",
-          "@type": "Product",
-          "name": product.name,
-          "image":[featuredAsset?.preview || product.featuredAsset?.preview],
-          "description": product.description.replace(/(<([^>]+)>)/gi, '').replace(/(?:&nbsp;|<br>)+/g, ''),
-          "sku": selectedVariant?.sku,
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": selectedVariant?.currencyCode,
-            "price": formatPrice(selectedVariant?.priceWithTax, selectedVariant?.currencyCode).replace('$', '')
-          },
-          "url": STORE_URL + url
-        });
-  }; 
+      '@context': 'http://schema.org',
+      '@type': 'Product',
+      name: product.name,
+      image: [featuredAsset?.preview || product.featuredAsset?.preview],
+      description: product.description
+        .replace(/(<([^>]+)>)/gi, '')
+        .replace(/(?:&nbsp;|<br>)+/g, ''),
+      sku: selectedVariant?.sku,
+      offers: {
+        '@type': 'Offer',
+        priceCurrency: selectedVariant?.currencyCode,
+        price: formatPrice(
+          selectedVariant?.priceWithTax,
+          selectedVariant?.currencyCode,
+        ).replace('$', ''),
+      },
+      url: STORE_URL + url,
+    });
+  };
 
   return (
-    <div>    
-      <script type="application/ld+json" dangerouslySetInnerHTML={{__html: productPageSchema(product, currentURL.pathname)}} />  
+    <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: productPageSchema(product, currentURL.pathname),
+        }}
+      />
       <div className="max-w-6xl mx-auto px-4">
         <h1 className="text-3xl sm:text-5xl font-light tracking-tight text-gray-900 my-8">
           {product.name}
@@ -185,7 +198,7 @@ export default function ProductSlug() {
                 }}
               />
             </div>
-            <activeOrderFetcher.Form method="post"  action="/api/active-order">
+            <activeOrderFetcher.Form method="post" action="/api/active-order">
               <input type="hidden" name="action" value="addItemToOrder" />
               {1 < product.variants.length ? (
                 <div className="mt-4">
@@ -225,40 +238,40 @@ export default function ProductSlug() {
               )}
 
               <div className="mt-10 flex flex-col sm:flex-row sm:items-center">
-              {allowOrder && (
-                <p className="text-3xl text-gray-900 mr-4">
-                  <Price
-                    priceWithTax={selectedVariant?.priceWithTax}
-                    currencyCode={selectedVariant?.currencyCode}
-                  ></Price>
-                </p>
-              )}
-              {allowOrder && (
-                <div className="flex sm:flex-col1 align-baseline">
-                  <button
-                    type="submit"
-                    className={`max-w-xs flex-1 ${
-                      activeOrderFetcher.state !== 'idle'
-                        ? 'bg-gray-400'
-                        : qtyInCart === 0
-                        ? 'bg-primary-600 hover:bg-primary-700'
-                        : 'bg-green-600 active:bg-green-700 hover:bg-green-700'
-                    }
+                {allowOrder && (
+                  <p className="text-3xl text-gray-900 mr-4">
+                    <Price
+                      priceWithTax={selectedVariant?.priceWithTax}
+                      currencyCode={selectedVariant?.currencyCode}
+                    ></Price>
+                  </p>
+                )}
+                {allowOrder && (
+                  <div className="flex sm:flex-col1 align-baseline">
+                    <button
+                      type="submit"
+                      className={`max-w-xs flex-1 ${
+                        activeOrderFetcher.state !== 'idle'
+                          ? 'bg-gray-400'
+                          : qtyInCart === 0
+                          ? 'bg-primary-600 hover:bg-primary-700'
+                          : 'bg-green-600 active:bg-green-700 hover:bg-green-700'
+                      }
                                      transition-colors border border-transparent rounded-md py-3 px-8 flex items-center
                                       justify-center text-base font-medium text-white focus:outline-none
                                       focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-primary-500 sm:w-full`}
-                    disabled={activeOrderFetcher.state !== 'idle'}
-                  >
-                    {qtyInCart ? (
-                      <span className="flex items-center">
-                        <CheckIcon className="w-5 h-5 mr-1" /> {qtyInCart} in
-                        cart
-                      </span>
-                    ) : (
-                      `Add to cart`
-                    )}
-                  </button>
-                  {/*
+                      disabled={activeOrderFetcher.state !== 'idle'}
+                    >
+                      {qtyInCart ? (
+                        <span className="flex items-center">
+                          <CheckIcon className="w-5 h-5 mr-1" /> {qtyInCart} in
+                          cart
+                        </span>
+                      ) : (
+                        `Add to cart`
+                      )}
+                    </button>
+                    {/*
                   <button
                     type="button"
                     className="ml-4 py-3 px-3 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500"
@@ -270,12 +283,16 @@ export default function ProductSlug() {
                     <span className="sr-only">Add to favorites</span>
                   </button>
                     */}
-                </div>
-              )}
+                  </div>
+                )}
               </div>
               <div className="mt-2 flex items-center space-x-2">
                 <span className="text-gray-500">{selectedVariant?.sku}</span>
-                <StockLevelLabel stockLevel={allowOrder ? selectedVariant?.stockLevel : 'OUT_OF_STOCK'} />
+                <StockLevelLabel
+                  stockLevel={
+                    allowOrder ? selectedVariant?.stockLevel : 'OUT_OF_STOCK'
+                  }
+                />
               </div>
               {addItemToOrderError && (
                 <div className="mt-4">
@@ -284,39 +301,41 @@ export default function ProductSlug() {
               )}
               {lenSpecs > 0 && (
                 <section className="mt-12 pt-12 border-t text-xs">
-                <h3 className="text-gray-600 font-bold mb-2">Additional Information</h3>
-                <div className="mt-4">
-                <SpecTable items={product.customFields} />
-                </div>
-              </section>
+                  <h3 className="text-gray-600 font-bold mb-2">
+                    Additional Information
+                  </h3>
+                  <div className="mt-4">
+                    <SpecTable items={product.customFields} />
+                  </div>
+                </section>
               )}
-              {allowOrder && (        
-              <section className="mt-12 pt-12 border-t text-xs">
-                <h3 className="text-gray-600 font-bold mb-2">
-                  Shipping & Returns
-                </h3>
-                <div className="text-gray-500 space-y-1">
-                  <p>
-                    Standard shipping: 3 - 5 working days. Express shipping: 1 -
-                    3 working days.
-                  </p>
-                  <p>
-                    Shipping costs depend on delivery address and will be
-                    calculated during checkout.
-                  </p>
-                  <p>
-                    Returns are subject to terms. Please see the{' '}
-                    <span className="underline">returns page</span> for further
-                    information.
-                  </p>
-                </div>
-              </section>
+              {allowOrder && (
+                <section className="mt-12 pt-12 border-t text-xs">
+                  <h3 className="text-gray-600 font-bold mb-2">
+                    Shipping & Returns
+                  </h3>
+                  <div className="text-gray-500 space-y-1">
+                    <p>
+                      Standard shipping: 3 - 5 working days. Express shipping: 1
+                      - 3 working days.
+                    </p>
+                    <p>
+                      Shipping costs depend on delivery address and will be
+                      calculated during checkout.
+                    </p>
+                    <p>
+                      Returns are subject to terms. Please see the{' '}
+                      <span className="underline">returns page</span> for
+                      further information.
+                    </p>
+                  </div>
+                </section>
               )}
             </activeOrderFetcher.Form>
           </div>
         </div>
-      </div>      
-    </div>    
+      </div>
+    </div>
   );
 }
 
