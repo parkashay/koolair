@@ -3,7 +3,6 @@ export const APP_META_TITLE =
 export const APP_META_DESCRIPTION =
   'Coolant Pumps Offered by Koolair for Seawater Circulation Boat Air Conditioning HVAC Pumping Applications with Run Dry Protection To Keep You Cool.';
 export const DEMO_API_URL = 'https://admin.mfg-edge.com/shop-api';
-export const VENDURE_API_URL = 'https://admin.mfg-edge.com/shop-api';
 // export const VENDURE_API_URL = 'https://admin.mfg-edge.com/shop-api';
 export const CHANNEL_TOKEN = 'koolair';
 export const STORE_URL = 'https://koolair-remix.pages.dev';
