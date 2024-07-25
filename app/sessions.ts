@@ -1,5 +1,7 @@
 import { IS_CF_PAGES } from '~/utils/platform-adapter';
 
+//HINT: Don't know how to remove this cloudflare dependency withour breaking flowbites event handler??!?!
+
 function getCookieSessionStorageFactory() {
   if (IS_CF_PAGES) {
     return require('@remix-run/cloudflare').createCookieSessionStorage;
@@ -20,3 +22,11 @@ export const sessionStorage = getCookieSessionStorageFactory()({
     secrets: ['awdbhbjahdbaw'],
   },
 });
+// export const sessionStorage = createCookieSessionStorage({
+//   cookie: {
+//     name: '__session',
+//     httpOnly: true,
+//     path: '/',
+//     sameSite: 'lax',
+//   },
+// });

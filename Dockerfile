@@ -1,14 +1,16 @@
-# Build stage
-FROM node:18.19.0-bullseye-slim AS build
-WORKDIR /usr/server/app
-COPY ./package.json ./
-RUN yarn install
-COPY ./ .
-RUN yarn build
+FROM --platform=linux/amd64 node:18-bullseye-slim
 
-# Final stage
-FROM node:18.19.0-bullseye-slim
 WORKDIR /usr/server/app
-COPY --from=build /usr/server/app .
+
+COPY ./package.json ./
+COPY ./package-lock.json ./
+
+RUN npm install -g npm@9.6.1
+RUN npm install
+ARG CI_COMMIT_SHA
+ENV CI_COMMIT_SHA=$CI_COMMIT_SHA
+
+COPY ./ .
+RUN npm run build
 ENV NODE_ENV=production
-CMD ["yarn","start"]
+CMD ["npm", "run" ,"start"] # will launch the remix app when we run this Docker image.
