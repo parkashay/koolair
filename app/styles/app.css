@@ -2471,6 +2471,11 @@ button:disabled {
   background-color: rgb(21 128 61 / var(--tw-bg-opacity));
 }
 
+#app .hover\:bg-gray-100:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
 #app .hover\:text-primary-500:hover {
   --tw-text-opacity: 1;
   color: rgb(14 165 233 / var(--tw-text-opacity));

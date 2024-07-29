@@ -1,11 +1,11 @@
 import { DocumentNode, print } from 'graphql';
-import { DEMO_API_URL, VENDURE_API_URL, CHANNEL_TOKEN } from './constants';
+import { DEMO_API_URL, CHANNEL_TOKEN } from './constants';
 import { getSdk } from './generated/graphql';
 import { sessionStorage } from './sessions';
 
 let API_URL =
   typeof process !== 'undefined'
-    ? VENDURE_API_URL ?? DEMO_API_URL
+    ? process.env.VENDURE_API_URL ?? DEMO_API_URL
     : DEMO_API_URL;
 
 export interface QueryOptions {
@@ -67,7 +67,7 @@ async function sendQuery<Response, Variables = {}>(options: {
   }));
 }
 
-const baseSdk = getSdk<QueryOptions>(requester);
+const baseSdk = getSdk<QueryOptions, unknown>(requester);
 
 type Sdk = typeof baseSdk;
 type SdkWithHeaders = {

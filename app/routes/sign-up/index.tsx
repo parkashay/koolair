@@ -7,11 +7,8 @@ import {
   RegisterValidationErrors,
   validateRegistrationForm,
 } from '~/utils/registration-helper';
-import { VENDURE_API_URL } from '~/constants';
 
 export async function action({ params, request }: DataFunctionArgs) {
-  const apiUrl = VENDURE_API_URL;
-
   const body = await request.formData();
   const fieldErrors = validateRegistrationForm(body);
   if (Object.keys(fieldErrors).length !== 0) {
@@ -53,7 +50,7 @@ export default function SignUpPage() {
         </div>
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">            
+          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <Form className="space-y-6" method="post">
               <input
                 type="hidden"
